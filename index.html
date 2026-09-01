@@ -1,0 +1,440 @@
+<!--
+  ========================================================================
+  SANJANA VASANTH — PERSONAL PORTFOLIO WEBSITE
+  
+  PROJECT: Static Portfolio Website (No build tools required)
+  
+  TECHNOLOGIES:
+  - HTML5 (semantic markup)
+  - CSS3 (Grid, Flexbox, custom properties, animations)
+  - Vanilla JavaScript (ES6+, no frameworks)
+  - Google Fonts (Space Grotesk, Inter, JetBrains Mono)
+  
+  ========================================================================
+  HOW TO RUN THIS PROJECT:
+  
+  1. NO INSTALLATION NEEDED — This is a static website with no dependencies.
+     No npm, no build step, no server configuration required.
+  
+  2. OPTION A: Open directly in browser
+     - Find index.html in your file explorer
+     - Double-click to open in your default browser
+     - OR right-click → "Open with" → choose your browser
+  
+  3. OPTION B: Use a local server (RECOMMENDED for development)
+     This prevents CORS issues and enables proper file loading:
+     
+     macOS/Linux (Python installed):
+       python3 -m http.server 8000
+       Then open: http://localhost:8000
+     
+     macOS (using Node.js):
+       npx http-server
+       Then open: http://localhost:8080
+     
+     Windows (PowerShell):
+       python -m http.server 8000
+       Then open: http://localhost:8000
+  
+  4. OPTION C: Live Server in VS Code
+     - Install "Live Server" extension (Go Live button in bottom right)
+     - Right-click index.html → "Open with Live Server"
+     - Auto-refreshes on file changes
+  
+  ========================================================================
+  PROJECT STRUCTURE:
+  
+  portfolio-task-1/
+  ├── index.html          (Main page — start here)
+  ├── css/
+  │   └── style.css       (Styling, animations, responsive design)
+  ├── js/
+  │   └── script.js       (Interactivity, scroll effects, form validation)
+  ├── assets/
+  │   └── Sanjana_Vasanth_Resume.pdf  (Downloadable resume)
+  └── README.md           (Project documentation)
+  
+  ========================================================================
+  KEY FEATURES:
+  
+  ✓ Fully responsive (mobile, tablet, desktop)
+  ✓ Sticky navbar with active link highlighting
+  ✓ Mobile hamburger menu
+  ✓ Scroll-triggered animations (IntersectionObserver)
+  ✓ Smooth section scrolling
+  ✓ Dark theme (indigo-navy) with amber/teal accents
+  ✓ Contact form with client-side validation
+  ✓ Resume download
+  ✓ Keyboard accessible
+  ✓ Respects prefers-reduced-motion setting
+  
+  ========================================================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sanjana Vasanth — Full Stack Developer</title>
+<meta name="description" content="Portfolio of Sanjana Vasanth, Computer Science undergraduate and full stack developer." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="nav-brand"><span class="brand-bracket">&lt;</span>SV<span class="brand-bracket">/&gt;</span></a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" class="nav-link active" data-nav>Home</a>
+      <a href="#about" class="nav-link" data-nav>About</a>
+      <a href="#skills" class="nav-link" data-nav>Skills</a>
+      <a href="#projects" class="nav-link" data-nav>Projects</a>
+      <a href="#education" class="nav-link" data-nav>Education</a>
+      <a href="#certifications" class="nav-link" data-nav>Certifications</a>
+      <a href="#contact" class="nav-link" data-nav>Contact</a>
+    </nav>
+
+    <a href="assets/Sanjana_Vasanth_Resume.pdf" download class="nav-cta">Resume</a>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="home">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="grid-overlay"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+  </div>
+
+  <div class="hero-inner">
+    <p class="hero-eyebrow"><span class="dot"></span> Available for internships &amp; opportunities</p>
+
+    <h1 class="hero-name">Sanjana Vasanth</h1>
+    <p class="hero-title">Full Stack Developer <span class="hero-title-divider">/</span> CS Undergraduate</p>
+
+    <p class="hero-summary">
+      Motivated and detail-oriented Computer Science undergraduate with a strong passion for full stack
+      software development and problem-solving. Skilled in building responsive, user-focused web applications
+      using modern front-end and back-end technologies — eager to contribute to real-world projects while
+      growing as a well-rounded software engineer.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-ghost">Contact Me</a>
+      <a href="assets/Sanjana_Vasanth_Resume.pdf" download class="btn btn-outline">Download Resume</a>
+    </div>
+
+    <!-- Signature element: the "stack" -->
+    <div class="stack-visual" aria-hidden="true">
+      <div class="stack-layer stack-frontend">
+        <span class="stack-label">Frontend</span>
+        <span class="stack-tags">React.js · HTML5 · CSS3 · Bootstrap</span>
+      </div>
+      <div class="stack-layer stack-backend">
+        <span class="stack-label">Backend</span>
+        <span class="stack-tags">Node.js · Express.js · REST APIs</span>
+      </div>
+      <div class="stack-layer stack-database">
+        <span class="stack-label">Database</span>
+        <span class="stack-tags">MongoDB · MySQL</span>
+      </div>
+    </div>
+  </div>
+
+  <a href="#about" class="scroll-cue" aria-label="Scroll down">
+    <span></span>
+  </a>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <p class="section-eyebrow">01 — About</p>
+    <h2 class="section-title">Building software, one layer at a time.</h2>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a Computer Science undergraduate at Dhanalakshmi Srinivasan University, currently pursuing my
+          B.Tech in Computer Science and Engineering (2023–2027). My focus is full stack development —
+          I enjoy designing responsive, user-focused interfaces and pairing them with reliable, well-structured
+          backends and databases.
+        </p>
+        <p>
+          I work comfortably across the stack, from REST API design to database schema modelling, and I'm quick
+          to pick up new tools and frameworks. I care most about writing software that's genuinely usable —
+          clean CRUD flows, secure authentication, and interfaces that hold up on any screen size.
+        </p>
+      </div>
+
+      <div class="about-side">
+        <div class="side-card">
+          <h3 class="side-card-title">Strengths</h3>
+          <ul class="pill-list">
+            <li>Quick Learner</li>
+            <li>Team Player</li>
+            <li>Problem Solving</li>
+            <li>Adaptability</li>
+            <li>Time Management</li>
+            <li>Communication</li>
+          </ul>
+        </div>
+
+        <div class="side-card">
+          <h3 class="side-card-title">Areas of Interest</h3>
+          <ul class="pill-list">
+            <li>Full Stack Development</li>
+            <li>Web Technologies</li>
+            <li>Cloud Computing</li>
+            <li>Artificial Intelligence</li>
+            <li>Software Engineering</li>
+          </ul>
+        </div>
+
+        <div class="side-card">
+          <h3 class="side-card-title">Languages</h3>
+          <ul class="pill-list">
+            <li>English</li>
+            <li>Tamil</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<section class="section section-alt" id="skills">
+  <div class="section-inner">
+    <p class="section-eyebrow">02 — Skills</p>
+    <h2 class="section-title">Technical toolkit.</h2>
+
+    <div class="skills-grid" id="skillsGrid">
+      <div class="skill-card" data-animate>
+        <div class="skill-card-head">
+          <span class="skill-icon">{ }</span>
+          <h3>Programming Languages</h3>
+        </div>
+        <div class="skill-tags">
+          <span>Java</span><span>Python</span><span>JavaScript</span><span>C</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-animate>
+        <div class="skill-card-head">
+          <span class="skill-icon">◧</span>
+          <h3>Frontend</h3>
+        </div>
+        <div class="skill-tags">
+          <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>React.js</span><span>Bootstrap</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-animate>
+        <div class="skill-card-head">
+          <span class="skill-icon">◨</span>
+          <h3>Backend</h3>
+        </div>
+        <div class="skill-tags">
+          <span>Node.js</span><span>Express.js</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-animate>
+        <div class="skill-card-head">
+          <span class="skill-icon">▤</span>
+          <h3>Database</h3>
+        </div>
+        <div class="skill-tags">
+          <span>MySQL</span><span>MongoDB</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-animate>
+        <div class="skill-card-head">
+          <span class="skill-icon">⚙</span>
+          <h3>Tools</h3>
+        </div>
+        <div class="skill-tags">
+          <span>Git</span><span>GitHub</span><span>VS Code</span><span>Postman</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-animate>
+        <div class="skill-card-head">
+          <span class="skill-icon">✦</span>
+          <h3>Concepts</h3>
+        </div>
+        <div class="skill-tags">
+          <span>OOP</span><span>REST APIs</span><span>Responsive Design</span><span>Data Structures</span><span>DBMS</span><span>Operating Systems</span><span>Computer Networks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section class="section" id="projects">
+  <div class="section-inner">
+    <p class="section-eyebrow">03 — Projects</p>
+    <h2 class="section-title">Academic projects.</h2>
+
+    <div class="projects-list">
+
+      <article class="project-card" data-animate>
+        <div class="project-card-top">
+          <h3>Full Stack E-Commerce Website</h3>
+          <div class="project-tech">
+            <span>React.js</span><span>Node.js</span><span>Express.js</span><span>MongoDB</span>
+          </div>
+        </div>
+        <ul class="project-features">
+          <li>Built a responsive e-commerce platform with product listing, cart, and checkout functionality using React.js and Node.js.</li>
+          <li>Implemented secure user authentication and authorization using JWT-based sessions.</li>
+          <li>Designed RESTful APIs for product, cart, and order management with full CRUD operations.</li>
+          <li>Integrated MongoDB for persistent storage and optimized query performance for a smooth user experience.</li>
+        </ul>
+      </article>
+
+      <article class="project-card" data-animate>
+        <div class="project-card-top">
+          <h3>Student Management System</h3>
+          <div class="project-tech">
+            <span>Java</span><span>MySQL</span><span>HTML/CSS</span>
+          </div>
+        </div>
+        <ul class="project-features">
+          <li>Developed a web-based system to manage student records, attendance, and academic performance.</li>
+          <li>Implemented role-based login for admin and faculty with secure authentication.</li>
+          <li>Designed a normalized MySQL database schema to support efficient CRUD operations.</li>
+          <li>Built a responsive interface ensuring accessibility across devices.</li>
+        </ul>
+      </article>
+
+      <article class="project-card" data-animate>
+        <div class="project-card-top">
+          <h3>Online Food Ordering Platform</h3>
+          <div class="project-tech">
+            <span>React.js</span><span>Express.js</span><span>MongoDB</span>
+          </div>
+        </div>
+        <ul class="project-features">
+          <li>Created a full stack food ordering application with menu browsing, cart, and order tracking features.</li>
+          <li>Developed RESTful backend APIs to handle orders, users, and restaurant data with complete CRUD support.</li>
+          <li>Implemented user authentication and session management for secure order placement.</li>
+          <li>Ensured responsive, mobile-friendly design for seamless ordering across devices.</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EDUCATION ===================== -->
+<section class="section section-alt" id="education">
+  <div class="section-inner">
+    <p class="section-eyebrow">04 — Education</p>
+    <h2 class="section-title">Academic background.</h2>
+
+    <div class="education-card" data-animate>
+      <div class="education-year">2023 — 2027</div>
+      <div class="education-body">
+        <h3>B.Tech, Computer Science and Engineering</h3>
+        <p class="education-school">Dhanalakshmi Srinivasan University</p>
+        <p class="education-meta">CGPA: 7.8</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CERTIFICATIONS ===================== -->
+<section class="section" id="certifications">
+  <div class="section-inner">
+    <p class="section-eyebrow">05 — Certifications</p>
+    <h2 class="section-title">Trainings &amp; certifications.</h2>
+
+    <div class="cert-grid">
+      <div class="cert-card" data-animate><span class="cert-mark">✓</span><p>Full Stack Web Development (Training)</p></div>
+      <div class="cert-card" data-animate><span class="cert-mark">✓</span><p>Java Programming Fundamentals</p></div>
+      <div class="cert-card" data-animate><span class="cert-mark">✓</span><p>Python for Beginners</p></div>
+      <div class="cert-card" data-animate><span class="cert-mark">✓</span><p>SQL and Database Fundamentals</p></div>
+      <div class="cert-card" data-animate><span class="cert-mark">✓</span><p>Git &amp; GitHub Essentials</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="section section-alt" id="contact">
+  <div class="section-inner">
+    <p class="section-eyebrow">06 — Contact</p>
+    <h2 class="section-title">Let's build something together.</h2>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <a class="contact-row" href="mailto:sanjanaavasanth@gmail.com">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">sanjanaavasanth@gmail.com</span>
+        </a>
+        <a class="contact-row" href="tel:+919345783372">
+          <span class="contact-label">Phone</span>
+          <span class="contact-value">+91 93457 83372</span>
+        </a>
+        <div class="contact-row contact-row-static">
+          <span class="contact-label">Location</span>
+          <span class="contact-value">Dhanalakshmi Srinivasan University</span>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+          <span class="form-error" id="nameError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          <span class="form-error" id="emailError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Tell me about the opportunity or project..." required></textarea>
+          <span class="form-error" id="messageError"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+        <p class="form-success" id="formSuccess" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <a href="#home" class="nav-brand"><span class="brand-bracket">&lt;</span>SV<span class="brand-bracket">/&gt;</span></a>
+    <p class="footer-text">Sanjana Vasanth — Full Stack Developer</p>
+    <p class="footer-copy">&copy; <span id="year"></span> Sanjana Vasanth. Built with HTML, CSS &amp; JavaScript.</p>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+<script src="js/script.js"></script>
+</body>
+</html>
